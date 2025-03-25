@@ -1,5 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Index = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,19 +14,18 @@ const Index = () => {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>PC Builder</title>
+            <title>PC Market - Gaming Computers</title>
             <style>
                 /* Reset and base styles */
                 * {
                     margin: 0;
                     padding: 0;
                     box-sizing: border-box;
-                    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-                    transition: all 0.3s ease;
+                    font-family: 'Segoe UI', Arial, sans-serif;
                 }
                 
                 body {
-                    background-color: #f9f9f9;
+                    background-color: #f5f5f5;
                     color: #333;
                     line-height: 1.6;
                 }
@@ -33,335 +33,406 @@ const Index = () => {
                 .container {
                     max-width: 1200px;
                     margin: 0 auto;
-                    padding: 0 20px;
+                    padding: 0 15px;
+                }
+                
+                a {
+                    text-decoration: none;
+                    color: inherit;
+                }
+                
+                img {
+                    max-width: 100%;
                 }
                 
                 /* Header styles */
                 header {
-                    background-color: rgba(255, 255, 255, 0.95);
+                    background-color: #fff;
                     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
                     position: sticky;
                     top: 0;
                     z-index: 100;
-                    backdrop-filter: blur(10px);
                 }
                 
-                .navbar {
+                .header-top {
+                    background-color: #232F3E;
+                    color: white;
+                    padding: 8px 0;
+                    font-size: 14px;
+                }
+                
+                .header-top .container {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                }
+                
+                .contact-info {
+                    display: flex;
+                    gap: 20px;
+                }
+                
+                .contact-info i {
+                    margin-right: 5px;
+                }
+                
+                .header-main {
                     padding: 15px 0;
                 }
                 
+                .header-main .container {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                
                 .logo {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: #232F3E;
+                }
+                
+                .logo span {
+                    color: #FF9900;
+                }
+                
+                .search-bar {
+                    flex-grow: 1;
+                    max-width: 500px;
+                    margin: 0 30px;
+                    position: relative;
+                }
+                
+                .search-bar input {
+                    width: 100%;
+                    padding: 10px 15px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 14px;
+                }
+                
+                .search-bar button {
+                    position: absolute;
+                    right: 5px;
+                    top: 5px;
+                    background: #FF9900;
+                    border: none;
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+                
+                .header-actions {
+                    display: flex;
+                    gap: 20px;
+                    align-items: center;
+                }
+                
+                .action-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    font-size: 14px;
+                }
+                
+                .action-item i {
+                    font-size: 20px;
+                    margin-bottom: 3px;
+                }
+                
+                /* Navigation styles */
+                nav {
+                    background-color: #131921;
+                    color: white;
+                }
+                
+                .nav-container {
+                    display: flex;
+                    justify-content: space-between;
+                }
+                
+                .main-nav {
+                    display: flex;
+                }
+                
+                .main-nav li {
+                    list-style: none;
+                    position: relative;
+                }
+                
+                .main-nav li a {
+                    display: block;
+                    padding: 15px 20px;
+                    transition: all 0.3s ease;
+                }
+                
+                .main-nav li:hover {
+                    background-color: #232F3E;
+                }
+                
+                .main-nav li:hover > ul {
+                    display: block;
+                }
+                
+                .main-nav ul {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background-color: #232F3E;
+                    width: 200px;
+                    z-index: 10;
+                }
+                
+                .main-nav ul li {
+                    width: 100%;
+                }
+                
+                .main-nav ul li a {
+                    padding: 10px 15px;
+                }
+                
+                .support-nav {
                     display: flex;
                     align-items: center;
-                    font-weight: bold;
-                    font-size: 1.5rem;
-                    color: #3370ff;
                 }
                 
-                .logo-icon {
-                    margin-right: 10px;
-                    font-size: 1.8rem;
-                }
-                
-                .nav-links {
+                .support-nav .hotline {
+                    padding: 0 15px;
                     display: flex;
-                    gap: 25px;
+                    align-items: center;
+                    gap: 10px;
                 }
                 
-                .nav-links a {
-                    color: #333;
-                    text-decoration: none;
-                    font-weight: 500;
+                .support-nav .hotline span {
+                    color: #FF9900;
+                    font-weight: bold;
                 }
                 
-                .nav-links a:hover {
-                    color: #3370ff;
+                /* Banner styles */
+                .banner {
+                    margin: 20px 0;
                 }
                 
-                .cta-button {
-                    background-color: #3370ff;
-                    color: white;
-                    border: none;
-                    padding: 10px 20px;
+                .banner img {
+                    width: 100%;
+                    height: auto;
                     border-radius: 8px;
-                    font-weight: 600;
-                    cursor: pointer;
                 }
                 
-                .cta-button:hover {
-                    background-color: #2860e6;
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 12px rgba(51, 112, 255, 0.2);
-                }
-                
-                .cta-button:active {
-                    transform: translateY(0);
-                }
-                
-                .menu-toggle {
-                    display: none;
-                    background: none;
-                    border: none;
-                    font-size: 1.5rem;
-                    cursor: pointer;
-                }
-                
-                /* Hero section */
-                .hero {
-                    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), url('https://images.unsplash.com/photo-1587202372775-e229f172b9d7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
-                    background-size: cover;
-                    background-position: center;
-                    padding: 80px 0;
-                    text-align: center;
-                }
-                
-                .hero h1 {
-                    font-size: 3rem;
-                    margin-bottom: 20px;
-                    background: linear-gradient(to right, #3370ff, #5e90ff);
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    color: transparent;
-                    display: inline-block;
-                }
-                
-                .hero p {
-                    font-size: 1.2rem;
-                    color: #666;
-                    max-width: 600px;
-                    margin: 0 auto 30px;
-                }
-                
-                /* Component selection section */
-                .components-section {
-                    padding: 60px 0;
+                /* Product grid styles */
+                .products-section {
+                    margin: 40px 0;
                 }
                 
                 .section-title {
-                    text-align: center;
-                    margin-bottom: 40px;
+                    margin-bottom: 20px;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
                 }
                 
                 .section-title h2 {
-                    font-size: 2.5rem;
-                    margin-bottom: 15px;
+                    background-color: #FF9900;
+                    color: white;
+                    padding: 10px 20px;
+                    display: inline-block;
+                    border-radius: 5px 5px 0 0;
+                    margin: 0;
                 }
                 
-                .section-title p {
-                    color: #666;
-                    max-width: 600px;
-                    margin: 0 auto;
+                .section-title::after {
+                    content: '';
+                    flex-grow: 1;
+                    height: 2px;
+                    background-color: #FF9900;
+                    margin-left: 15px;
                 }
                 
-                .component-selector {
+                .filter-options {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    background-color: #f9f9f9;
+                    padding: 15px;
+                    border-radius: 5px;
+                }
+                
+                .filter-buttons {
+                    display: flex;
+                    gap: 10px;
+                }
+                
+                .filter-button {
+                    padding: 8px 15px;
+                    background-color: #fff;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+                
+                .filter-button:hover, .filter-button.active {
+                    background-color: #FF9900;
+                    color: white;
+                    border-color: #FF9900;
+                }
+                
+                .sort-options select {
+                    padding: 8px 15px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    background-color: white;
+                }
+                
+                .product-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+                    gap: 20px;
+                }
+                
+                .product-card {
+                    background-color: white;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                
+                .product-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+                }
+                
+                .product-card img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: contain;
+                    background-color: #f9f9f9;
+                    padding: 15px;
+                }
+                
+                .product-info {
+                    padding: 15px;
+                }
+                
+                .product-title {
+                    font-size: 16px;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    height: 44px;
+                }
+                
+                .product-specs {
+                    margin: 10px 0;
+                    background-color: #f9f9f9;
+                    padding: 10px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                }
+                
+                .spec-item {
+                    display: flex;
+                    margin-bottom: 5px;
+                }
+                
+                .spec-name {
+                    font-weight: 500;
+                    min-width: 70px;
+                }
+                
+                .product-price {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 15px;
+                }
+                
+                .price {
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #FF9900;
+                }
+                
+                .price-old {
+                    text-decoration: line-through;
+                    color: #999;
+                    font-size: 14px;
+                    margin-right: 10px;
+                }
+                
+                .add-to-cart {
+                    background-color: #FF9900;
+                    color: white;
+                    border: none;
+                    padding: 8px 15px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                }
+                
+                .add-to-cart:hover {
+                    background-color: #E68A00;
+                }
+                
+                /* Pagination styles */
+                .pagination {
                     display: flex;
                     justify-content: center;
-                    margin-bottom: 30px;
-                    flex-wrap: wrap;
-                    gap: 15px;
+                    margin: 40px 0;
                 }
                 
-                .component-type {
-                    padding: 12px 24px;
+                .pagination a {
+                    display: inline-block;
+                    padding: 8px 14px;
+                    margin: 0 5px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
                     background-color: white;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    border: 1px solid #eaeaea;
-                    font-weight: 500;
+                    transition: all 0.3s ease;
                 }
                 
-                .component-type:hover {
-                    border-color: #3370ff;
-                    color: #3370ff;
-                }
-                
-                .component-type.active {
-                    background-color: #3370ff;
+                .pagination a:hover, .pagination a.active {
+                    background-color: #FF9900;
                     color: white;
-                    border-color: #3370ff;
+                    border-color: #FF9900;
                 }
                 
-                .component-cards {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                    gap: 20px;
-                    margin-top: 30px;
-                }
-                
-                .component-card {
-                    background-color: white;
-                    border-radius: 12px;
-                    overflow: hidden;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-                    cursor: pointer;
-                }
-                
-                .component-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-                }
-                
-                .card-image {
-                    height: 180px;
-                    width: 100%;
-                    object-fit: contain;
-                    background-color: #f5f7ff;
-                    padding: 20px;
-                }
-                
-                .card-content {
-                    padding: 20px;
-                }
-                
-                .card-title {
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                    margin-bottom: 8px;
-                }
-                
-                .card-specs {
-                    color: #666;
-                    font-size: 0.9rem;
-                    margin-bottom: 15px;
-                }
-                
-                .card-price {
-                    font-weight: 700;
-                    color: #3370ff;
-                    font-size: 1.2rem;
-                    margin-bottom: 15px;
-                }
-                
-                .card-action {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                
-                .add-button {
-                    background-color: #f0f5ff;
-                    color: #3370ff;
-                    border: none;
-                    padding: 8px 16px;
-                    border-radius: 6px;
-                    font-weight: 600;
-                    cursor: pointer;
-                }
-                
-                .add-button:hover {
-                    background-color: #3370ff;
-                    color: white;
-                }
-                
-                /* Build summary */
-                .build-summary {
-                    background-color: white;
-                    border-radius: 12px;
-                    padding: 30px;
-                    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-                    margin-top: 50px;
-                }
-                
-                .summary-title {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 25px;
-                }
-                
-                .summary-title h3 {
-                    font-size: 1.5rem;
-                }
-                
-                .total-price {
-                    font-size: 1.8rem;
-                    font-weight: 700;
-                    color: #3370ff;
-                }
-                
-                .selected-components {
-                    border-top: 1px solid #eaeaea;
-                    padding-top: 20px;
-                }
-                
-                .selected-item {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 12px 0;
-                    border-bottom: 1px solid #f5f5f5;
-                }
-                
-                .selected-item-info {
-                    display: flex;
-                    align-items: center;
-                    gap: 15px;
-                }
-                
-                .selected-item-image {
-                    width: 50px;
-                    height: 50px;
-                    object-fit: contain;
-                    background-color: #f5f7ff;
-                    border-radius: 6px;
-                    padding: 5px;
-                }
-                
-                .selected-item-name {
-                    font-weight: 500;
-                }
-                
-                .selected-item-price {
-                    font-weight: 600;
-                }
-                
-                .remove-button {
-                    background: none;
-                    border: none;
-                    color: #ff4d4f;
-                    cursor: pointer;
-                    font-size: 1.2rem;
-                }
-                
-                .checkout-button {
-                    background-color: #3370ff;
-                    color: white;
-                    border: none;
-                    padding: 14px 28px;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                    cursor: pointer;
-                    width: 100%;
-                    margin-top: 30px;
-                }
-                
-                .checkout-button:hover {
-                    background-color: #2860e6;
-                }
-                
-                /* Footer */
+                /* Footer styles */
                 footer {
-                    background-color: #1a1a1a;
-                    color: #fff;
-                    padding: 60px 0 30px;
-                    margin-top: 80px;
+                    background-color: #232F3E;
+                    color: white;
+                    padding: 50px 0 20px;
                 }
                 
                 .footer-content {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                    gap: 40px;
-                    margin-bottom: 40px;
+                    gap: 30px;
+                    margin-bottom: 30px;
                 }
                 
-                .footer-column h4 {
-                    font-size: 1.2rem;
+                .footer-column h3 {
+                    font-size: 18px;
                     margin-bottom: 20px;
-                    color: #fff;
+                    position: relative;
+                    padding-bottom: 10px;
+                }
+                
+                .footer-column h3::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 50px;
+                    height: 2px;
+                    background-color: #FF9900;
                 }
                 
                 .footer-column ul {
@@ -369,437 +440,650 @@ const Index = () => {
                 }
                 
                 .footer-column ul li {
-                    margin-bottom: 12px;
+                    margin-bottom: 10px;
                 }
                 
                 .footer-column ul li a {
-                    color: #aaa;
-                    text-decoration: none;
+                    transition: color 0.3s ease;
                 }
                 
                 .footer-column ul li a:hover {
-                    color: #3370ff;
+                    color: #FF9900;
+                }
+                
+                .footer-contact p {
+                    margin-bottom: 10px;
+                    display: flex;
+                    align-items: center;
+                }
+                
+                .footer-contact i {
+                    margin-right: 10px;
+                    width: 20px;
                 }
                 
                 .footer-bottom {
                     text-align: center;
-                    padding-top: 30px;
-                    border-top: 1px solid #333;
-                    color: #888;
-                    font-size: 0.9rem;
+                    padding-top: 20px;
+                    border-top: 1px solid rgba(255, 255, 255, 0.1);
+                    margin-top: 30px;
+                    font-size: 14px;
                 }
                 
                 /* Responsive styles */
-                @media (max-width: 768px) {
-                    .nav-links {
-                        display: none;
-                    }
-                
-                    .menu-toggle {
-                        display: block;
-                    }
-                
-                    .hero h1 {
-                        font-size: 2.2rem;
-                    }
-                
-                    .section-title h2 {
-                        font-size: 2rem;
-                    }
-                
-                    .mobile-menu {
-                        position: fixed;
-                        top: 70px;
-                        left: 0;
-                        right: 0;
-                        background-color: white;
-                        padding: 20px;
-                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                        display: flex;
-                        flex-direction: column;
-                        gap: 15px;
-                        transform: translateY(-100%);
-                        opacity: 0;
-                        pointer-events: none;
-                    }
-                
-                    .mobile-menu.active {
-                        transform: translateY(0);
-                        opacity: 1;
-                        pointer-events: auto;
-                    }
-                
-                    .mobile-menu a {
-                        color: #333;
-                        text-decoration: none;
-                        font-weight: 500;
-                        padding: 12px;
-                        border-radius: 8px;
-                    }
-                
-                    .mobile-menu a:hover {
-                        background-color: #f5f5f5;
+                @media (max-width: 992px) {
+                    .search-bar {
+                        max-width: 300px;
+                        margin: 0 15px;
                     }
                 }
                 
-                @media (max-width: 480px) {
-                    .component-selector {
-                        flex-direction: column;
-                        width: 100%;
+                @media (max-width: 768px) {
+                    .header-main .container {
+                        flex-wrap: wrap;
                     }
-                
-                    .component-type {
+                    
+                    .logo {
+                        margin-bottom: 15px;
+                    }
+                    
+                    .search-bar {
+                        max-width: 100%;
+                        margin: 15px 0;
+                        order: 3;
+                    }
+                    
+                    .header-actions {
+                        margin-left: auto;
+                    }
+                    
+                    .nav-container {
+                        flex-direction: column;
+                    }
+                    
+                    .main-nav {
+                        flex-direction: column;
+                    }
+                    
+                    .main-nav ul {
+                        position: static;
                         width: 100%;
-                        text-align: center;
+                        display: none;
+                    }
+                    
+                    .support-nav {
+                        padding: 15px 0;
+                        justify-content: center;
+                    }
+                    
+                    .product-grid {
+                        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+                    }
+                }
+                
+                @media (max-width: 576px) {
+                    .contact-info {
+                        display: none;
+                    }
+                    
+                    .header-top .container {
+                        justify-content: center;
+                    }
+                    
+                    .header-actions {
+                        gap: 10px;
+                    }
+                    
+                    .action-item span {
+                        display: none;
+                    }
+                    
+                    .filter-options {
+                        flex-direction: column;
+                        gap: 15px;
+                    }
+                    
+                    .product-grid {
+                        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
                     }
                 }
             </style>
         </head>
         <body>
             <header>
-                <div class="container">
-                    <nav class="navbar">
-                        <a href="#" class="logo">
-                            <span class="logo-icon">🖥️</span>
-                            PC Builder
-                        </a>
-                        <div class="nav-links">
-                            <a href="#">Home</a>
-                            <a href="#">Components</a>
-                            <a href="#">Builds</a>
-                            <a href="#">About</a>
-                            <button class="cta-button">Start Building</button>
+                <div class="header-top">
+                    <div class="container">
+                        <div class="contact-info">
+                            <a href="tel:0909123456"><i class="fas fa-phone"></i> 0909 123 456</a>
+                            <a href="mailto:info@pcmarket.com"><i class="fas fa-envelope"></i> info@pcmarket.com</a>
                         </div>
-                        <button class="menu-toggle">☰</button>
-                    </nav>
+                        <div class="top-links">
+                            <a href="#">Tin tức</a> | 
+                            <a href="#">Giới thiệu</a> | 
+                            <a href="#">Liên hệ</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="mobile-menu">
-                    <a href="#">Home</a>
-                    <a href="#">Components</a>
-                    <a href="#">Builds</a>
-                    <a href="#">About</a>
-                    <button class="cta-button">Start Building</button>
+                <div class="header-main">
+                    <div class="container">
+                        <a href="#" class="logo">PC<span>Market</span></a>
+                        <div class="search-bar">
+                            <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                            <button><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="header-actions">
+                            <a href="#" class="action-item">
+                                <i class="fas fa-user-circle"></i>
+                                <span>Tài khoản</span>
+                            </a>
+                            <a href="#" class="action-item">
+                                <i class="fas fa-heart"></i>
+                                <span>Yêu thích</span>
+                            </a>
+                            <a href="#" class="action-item">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span>Giỏ hàng</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+                <nav>
+                    <div class="container nav-container">
+                        <ul class="main-nav">
+                            <li><a href="#">Trang chủ</a></li>
+                            <li>
+                                <a href="#">Máy tính chơi game</a>
+                                <ul>
+                                    <li><a href="#">PC Gaming dưới 10 triệu</a></li>
+                                    <li><a href="#">PC Gaming 10-20 triệu</a></li>
+                                    <li><a href="#">PC Gaming 20-30 triệu</a></li>
+                                    <li><a href="#">PC Gaming trên 30 triệu</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">PC Văn phòng</a>
+                                <ul>
+                                    <li><a href="#">PC Office dưới 10 triệu</a></li>
+                                    <li><a href="#">PC Office 10-15 triệu</a></li>
+                                    <li><a href="#">PC Office cao cấp</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">PC Workstation</a>
+                                <ul>
+                                    <li><a href="#">PC Đồ họa - Kỹ thuật</a></li>
+                                    <li><a href="#">PC Render & 3D</a></li>
+                                    <li><a href="#">PC Studio</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Linh kiện PC</a>
+                                <ul>
+                                    <li><a href="#">CPU</a></li>
+                                    <li><a href="#">Mainboard</a></li>
+                                    <li><a href="#">RAM</a></li>
+                                    <li><a href="#">VGA</a></li>
+                                    <li><a href="#">SSD/HDD</a></li>
+                                    <li><a href="#">PSU</a></li>
+                                    <li><a href="#">Case</a></li>
+                                    <li><a href="#">Tản nhiệt</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Build PC</a></li>
+                        </ul>
+                        <div class="support-nav">
+                            <div class="hotline">
+                                <i class="fas fa-headset"></i>
+                                <div>
+                                    <div>Hotline:</div>
+                                    <span>0909 123 456</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
             </header>
 
-            <section class="hero">
-                <div class="container">
-                    <h1>Build Your Dream PC</h1>
-                    <p>Create a custom PC that perfectly matches your needs with our easy-to-use PC builder tool.</p>
-                    <button class="cta-button">Start Building Now</button>
+            <div class="container">
+                <div class="banner">
+                    <img src="https://static.gigabyte.com/StaticFile/Image/Global/9b0a3847306719de8d30e2908a991a8b/Product/26863/png/1000" alt="Gaming PC Banner">
                 </div>
-            </section>
 
-            <section class="components-section">
-                <div class="container">
+                <div class="products-section">
                     <div class="section-title">
-                        <h2>Select Your Components</h2>
-                        <p>Choose high-quality components that fit your budget and performance needs.</p>
+                        <h2>MÁY TÍNH CHƠI GAME</h2>
                     </div>
-
-                    <div class="component-selector">
-                        <button class="component-type active" data-type="cpu">CPU</button>
-                        <button class="component-type" data-type="gpu">GPU</button>
-                        <button class="component-type" data-type="motherboard">Motherboard</button>
-                        <button class="component-type" data-type="ram">RAM</button>
-                        <button class="component-type" data-type="storage">Storage</button>
-                        <button class="component-type" data-type="psu">Power Supply</button>
-                        <button class="component-type" data-type="case">Case</button>
-                        <button class="component-type" data-type="cooling">Cooling</button>
-                    </div>
-
-                    <div class="component-cards">
-                        <!-- CPU Cards -->
-                        <div class="component-card" data-component="cpu" data-id="cpu1">
-                            <img src="https://m.media-amazon.com/images/I/61twhaihHxL._AC_SL1500_.jpg" alt="CPU" class="card-image">
-                            <div class="card-content">
-                                <h3 class="card-title">Intel Core i7-12700K</h3>
-                                <p class="card-specs">12 Cores, 20 Threads, Up to 5.0 GHz</p>
-                                <p class="card-price">$379.99</p>
-                                <div class="card-action">
-                                    <span>Socket: LGA1700</span>
-                                    <button class="add-button" data-component="cpu" data-id="cpu1" data-price="379.99" data-name="Intel Core i7-12700K">Add</button>
-                                </div>
-                            </div>
+                    
+                    <div class="filter-options">
+                        <div class="filter-buttons">
+                            <button class="filter-button active">Tất cả</button>
+                            <button class="filter-button">Phổ thông</button>
+                            <button class="filter-button">Cao cấp</button>
+                            <button class="filter-button">Siêu cao cấp</button>
                         </div>
-                        <div class="component-card" data-component="cpu" data-id="cpu2">
-                            <img src="https://m.media-amazon.com/images/I/61IIbwz-+ML._AC_SL1500_.jpg" alt="CPU" class="card-image">
-                            <div class="card-content">
-                                <h3 class="card-title">AMD Ryzen 7 5800X</h3>
-                                <p class="card-specs">8 Cores, 16 Threads, Up to 4.7 GHz</p>
-                                <p class="card-price">$299.99</p>
-                                <div class="card-action">
-                                    <span>Socket: AM4</span>
-                                    <button class="add-button" data-component="cpu" data-id="cpu2" data-price="299.99" data-name="AMD Ryzen 7 5800X">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="component-card" data-component="cpu" data-id="cpu3">
-                            <img src="https://m.media-amazon.com/images/I/51Dx39HJ9qL._AC_SL1000_.jpg" alt="CPU" class="card-image">
-                            <div class="card-content">
-                                <h3 class="card-title">Intel Core i9-13900K</h3>
-                                <p class="card-specs">24 Cores, 32 Threads, Up to 5.8 GHz</p>
-                                <p class="card-price">$549.99</p>
-                                <div class="card-action">
-                                    <span>Socket: LGA1700</span>
-                                    <button class="add-button" data-component="cpu" data-id="cpu3" data-price="549.99" data-name="Intel Core i9-13900K">Add</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- GPU Cards (hidden by default) -->
-                        <div class="component-card" data-component="gpu" data-id="gpu1" style="display: none;">
-                            <img src="https://m.media-amazon.com/images/I/81U5H5c0jyL._AC_SL1500_.jpg" alt="GPU" class="card-image">
-                            <div class="card-content">
-                                <h3 class="card-title">NVIDIA RTX 3080</h3>
-                                <p class="card-specs">10GB GDDR6X, 8704 CUDA Cores</p>
-                                <p class="card-price">$699.99</p>
-                                <div class="card-action">
-                                    <span>PCIe 4.0</span>
-                                    <button class="add-button" data-component="gpu" data-id="gpu1" data-price="699.99" data-name="NVIDIA RTX 3080">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="component-card" data-component="gpu" data-id="gpu2" style="display: none;">
-                            <img src="https://m.media-amazon.com/images/I/81oEEQV+jZL._AC_SL1500_.jpg" alt="GPU" class="card-image">
-                            <div class="card-content">
-                                <h3 class="card-title">AMD Radeon RX 6800 XT</h3>
-                                <p class="card-specs">16GB GDDR6, 4608 Stream Processors</p>
-                                <p class="card-price">$579.99</p>
-                                <div class="card-action">
-                                    <span>PCIe 4.0</span>
-                                    <button class="add-button" data-component="gpu" data-id="gpu2" data-price="579.99" data-name="AMD Radeon RX 6800 XT">Add</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Motherboard Cards (hidden by default) -->
-                        <div class="component-card" data-component="motherboard" data-id="mobo1" style="display: none;">
-                            <img src="https://m.media-amazon.com/images/I/91DmGbvW+GL._AC_SL1500_.jpg" alt="Motherboard" class="card-image">
-                            <div class="card-content">
-                                <h3 class="card-title">ASUS ROG Strix Z690-E</h3>
-                                <p class="card-specs">Intel Z690, DDR5, PCIe 5.0</p>
-                                <p class="card-price">$469.99</p>
-                                <div class="card-action">
-                                    <span>Socket: LGA1700</span>
-                                    <button class="add-button" data-component="motherboard" data-id="mobo1" data-price="469.99" data-name="ASUS ROG Strix Z690-E">Add</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="component-card" data-component="motherboard" data-id="mobo2" style="display: none;">
-                            <img src="https://m.media-amazon.com/images/I/91+3IlJLqRL._AC_SL1500_.jpg" alt="Motherboard" class="card-image">
-                            <div class="card-content">
-                                <h3 class="card-title">MSI MAG B550 Tomahawk</h3>
-                                <p class="card-specs">AMD B550, DDR4, PCIe 4.0</p>
-                                <p class="card-price">$179.99</p>
-                                <div class="card-action">
-                                    <span>Socket: AM4</span>
-                                    <button class="add-button" data-component="motherboard" data-id="mobo2" data-price="179.99" data-name="MSI MAG B550 Tomahawk">Add</button>
-                                </div>
-                            </div>
+                        <div class="sort-options">
+                            <select>
+                                <option>Sắp xếp mặc định</option>
+                                <option>Giá: Thấp đến cao</option>
+                                <option>Giá: Cao đến thấp</option>
+                                <option>Tên: A-Z</option>
+                                <option>Tên: Z-A</option>
+                                <option>Mới nhất</option>
+                                <option>Bán chạy nhất</option>
+                            </select>
                         </div>
                     </div>
-
-                    <div class="build-summary">
-                        <div class="summary-title">
-                            <h3>Your PC Build</h3>
-                            <span class="total-price" id="total-price">$0.00</span>
-                        </div>
-                        <div class="selected-components" id="selected-components">
-                            <!-- Selected components will be added here dynamically -->
-                            <div class="empty-build" id="empty-build">
-                                <p style="text-align: center; padding: 20px 0;">Your build is empty. Start adding components!</p>
+                    
+                    <div class="product-grid">
+                        <!-- Product 1 -->
+                        <div class="product-card">
+                            <img src="https://product.hstatic.net/1000026716/product/dell_gaming_g15_5520_i5_12500h_f39ef2e6f2ce49d8818e7640cf799030_large.png" alt="Gaming PC">
+                            <div class="product-info">
+                                <h3 class="product-title">PC Gaming Intel i5-12400F | RTX 3060 | 16GB RAM</h3>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-name">CPU:</span>
+                                        <span class="spec-value">Intel Core i5-12400F</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">VGA:</span>
+                                        <span class="spec-value">NVIDIA RTX 3060 12GB</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM:</span>
+                                        <span class="spec-value">16GB DDR4 3200MHz</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">SSD:</span>
+                                        <span class="spec-value">512GB NVMe</span>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <div>
+                                        <span class="price-old">20.990.000đ</span>
+                                        <span class="price">18.490.000đ</span>
+                                    </div>
+                                    <button class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <button class="checkout-button">Complete Your Build</button>
+                        
+                        <!-- Product 2 -->
+                        <div class="product-card">
+                            <img src="https://product.hstatic.net/1000026716/product/gearvn-pc-glacier-i3406-i3-10105f-1_d5c143eb8b55478d9819b50c73ac97e7_large.jpg" alt="Gaming PC">
+                            <div class="product-info">
+                                <h3 class="product-title">PC Gaming AMD Ryzen 5 5600X | RTX 3060Ti | 16GB RAM</h3>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-name">CPU:</span>
+                                        <span class="spec-value">AMD Ryzen 5 5600X</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">VGA:</span>
+                                        <span class="spec-value">NVIDIA RTX 3060Ti 8GB</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM:</span>
+                                        <span class="spec-value">16GB DDR4 3600MHz</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">SSD:</span>
+                                        <span class="spec-value">1TB NVMe</span>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <div>
+                                        <span class="price-old">25.990.000đ</span>
+                                        <span class="price">22.990.000đ</span>
+                                    </div>
+                                    <button class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="product-card">
+                            <img src="https://hanoicomputercdn.com/media/product/65096_pc_streaming_nhat_tao_t23_intel_core_i5_13500_rtx_4060_8gb_16gb_ddr5_1tb_nvme_1.jpg" alt="Gaming PC">
+                            <div class="product-info">
+                                <h3 class="product-title">PC Gaming Intel i7-12700K | RTX 3070Ti | 32GB RAM</h3>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-name">CPU:</span>
+                                        <span class="spec-value">Intel Core i7-12700K</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">VGA:</span>
+                                        <span class="spec-value">NVIDIA RTX 3070Ti 8GB</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM:</span>
+                                        <span class="spec-value">32GB DDR4 3600MHz</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">SSD:</span>
+                                        <span class="spec-value">1TB NVMe</span>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <div>
+                                        <span class="price-old">35.990.000đ</span>
+                                        <span class="price">32.490.000đ</span>
+                                    </div>
+                                    <button class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 4 -->
+                        <div class="product-card">
+                            <img src="https://hanoicomputercdn.com/media/product/250_63568_case_h7_flow_white_05.jpg" alt="Gaming PC">
+                            <div class="product-info">
+                                <h3 class="product-title">PC Gaming AMD Ryzen 7 5800X | RX 6800 XT | 32GB RAM</h3>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-name">CPU:</span>
+                                        <span class="spec-value">AMD Ryzen 7 5800X</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">VGA:</span>
+                                        <span class="spec-value">AMD RX 6800 XT 16GB</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM:</span>
+                                        <span class="spec-value">32GB DDR4 3600MHz</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">SSD:</span>
+                                        <span class="spec-value">1TB NVMe</span>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <div>
+                                        <span class="price-old">31.990.000đ</span>
+                                        <span class="price">28.990.000đ</span>
+                                    </div>
+                                    <button class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="product-card">
+                            <img src="https://anphat.com.vn/media/product/250_38844_thermaltake_ah_t600_snow_ca_1q4_00m6wn_00__1_.jpg" alt="Gaming PC">
+                            <div class="product-info">
+                                <h3 class="product-title">PC Gaming Intel i9-12900K | RTX 3080Ti | 64GB RAM</h3>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-name">CPU:</span>
+                                        <span class="spec-value">Intel Core i9-12900K</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">VGA:</span>
+                                        <span class="spec-value">NVIDIA RTX 3080Ti 12GB</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM:</span>
+                                        <span class="spec-value">64GB DDR5 5200MHz</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">SSD:</span>
+                                        <span class="spec-value">2TB NVMe Gen4</span>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <div>
+                                        <span class="price-old">55.990.000đ</span>
+                                        <span class="price">49.990.000đ</span>
+                                    </div>
+                                    <button class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 6 -->
+                        <div class="product-card">
+                            <img src="https://product.hstatic.net/1000026716/product/h7_flow_white_01_9ae4d1fc54944bcd9d52bac5cb6d89ec_large.jpg" alt="Gaming PC">
+                            <div class="product-info">
+                                <h3 class="product-title">PC Gaming AMD Ryzen 9 5950X | RTX 3090 | 64GB RAM</h3>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-name">CPU:</span>
+                                        <span class="spec-value">AMD Ryzen 9 5950X</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">VGA:</span>
+                                        <span class="spec-value">NVIDIA RTX 3090 24GB</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM:</span>
+                                        <span class="spec-value">64GB DDR4 3600MHz</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">SSD:</span>
+                                        <span class="spec-value">2TB NVMe Gen4</span>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <div>
+                                        <span class="price-old">65.990.000đ</span>
+                                        <span class="price">59.990.000đ</span>
+                                    </div>
+                                    <button class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 7 -->
+                        <div class="product-card">
+                            <img src="https://product.hstatic.net/1000026716/product/i341001_7a83f6d5fb034a839eb5334ad4eabf8b_large.png" alt="Gaming PC">
+                            <div class="product-info">
+                                <h3 class="product-title">PC Gaming Intel i5-11400F | GTX 1660 Super | 16GB RAM</h3>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-name">CPU:</span>
+                                        <span class="spec-value">Intel Core i5-11400F</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">VGA:</span>
+                                        <span class="spec-value">NVIDIA GTX 1660 Super 6GB</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM:</span>
+                                        <span class="spec-value">16GB DDR4 3200MHz</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">SSD:</span>
+                                        <span class="spec-value">512GB NVMe</span>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <div>
+                                        <span class="price-old">15.990.000đ</span>
+                                        <span class="price">14.490.000đ</span>
+                                    </div>
+                                    <button class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 8 -->
+                        <div class="product-card">
+                            <img src="https://anphat.com.vn/media/product/250_40546_corsair_icue_5000d_rgb_hydro_x_edition_tempered_glass_mid_tower_atx_pc_smart_case___black_cc_9011246_ww__3_.jpg" alt="Gaming PC">
+                            <div class="product-info">
+                                <h3 class="product-title">PC Gaming AMD Ryzen 5 3600 | GTX 1650 Super | 16GB RAM</h3>
+                                <div class="product-specs">
+                                    <div class="spec-item">
+                                        <span class="spec-name">CPU:</span>
+                                        <span class="spec-value">AMD Ryzen 5 3600</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">VGA:</span>
+                                        <span class="spec-value">NVIDIA GTX 1650 Super 4GB</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">RAM:</span>
+                                        <span class="spec-value">16GB DDR4 3200MHz</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <span class="spec-name">SSD:</span>
+                                        <span class="spec-value">512GB NVMe</span>
+                                    </div>
+                                </div>
+                                <div class="product-price">
+                                    <div>
+                                        <span class="price-old">13.990.000đ</span>
+                                        <span class="price">12.490.000đ</span>
+                                    </div>
+                                    <button class="add-to-cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pagination">
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">»</a>
                     </div>
                 </div>
-            </section>
+            </div>
 
             <footer>
                 <div class="container">
                     <div class="footer-content">
                         <div class="footer-column">
-                            <h4>PC Builder</h4>
+                            <h3>Về PC Market</h3>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Our Team</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Giới thiệu</a></li>
+                                <li><a href="#">Tin tức công nghệ</a></li>
+                                <li><a href="#">Tuyển dụng</a></li>
+                                <li><a href="#">Chính sách bảo mật</a></li>
+                                <li><a href="#">Điều khoản sử dụng</a></li>
                             </ul>
                         </div>
                         <div class="footer-column">
-                            <h4>Resources</h4>
+                            <h3>Hỗ trợ khách hàng</h3>
                             <ul>
-                                <li><a href="#">Building Guides</a></li>
-                                <li><a href="#">Component Guides</a></li>
-                                <li><a href="#">PC Building Tips</a></li>
-                                <li><a href="#">FAQs</a></li>
+                                <li><a href="#">Hướng dẫn mua hàng</a></li>
+                                <li><a href="#">Chính sách vận chuyển</a></li>
+                                <li><a href="#">Chính sách đổi trả</a></li>
+                                <li><a href="#">Phương thức thanh toán</a></li>
+                                <li><a href="#">Bảo hành và sửa chữa</a></li>
                             </ul>
                         </div>
                         <div class="footer-column">
-                            <h4>Customer Support</h4>
+                            <h3>Phương thức thanh toán</h3>
                             <ul>
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Order Status</a></li>
-                                <li><a href="#">Returns & Refunds</a></li>
-                                <li><a href="#">Warranty Info</a></li>
+                                <li><a href="#">Chuyển khoản ngân hàng</a></li>
+                                <li><a href="#">Thanh toán khi nhận hàng (COD)</a></li>
+                                <li><a href="#">Thẻ tín dụng / Thẻ ghi nợ</a></li>
+                                <li><a href="#">Trả góp qua thẻ tín dụng</a></li>
                             </ul>
                         </div>
-                        <div class="footer-column">
-                            <h4>Connect With Us</h4>
-                            <ul>
-                                <li><a href="#">Facebook</a></li>
-                                <li><a href="#">Twitter</a></li>
-                                <li><a href="#">Instagram</a></li>
-                                <li><a href="#">YouTube</a></li>
-                            </ul>
+                        <div class="footer-column footer-contact">
+                            <h3>Thông tin liên hệ</h3>
+                            <p><i class="fas fa-map-marker-alt"></i> 123 Đường Công Nghệ, Quận 1, TP.HCM</p>
+                            <p><i class="fas fa-phone"></i> 0909 123 456</p>
+                            <p><i class="fas fa-envelope"></i> info@pcmarket.com</p>
+                            <p><i class="fas fa-clock"></i> 8:00 - 20:00, Thứ 2 - Chủ nhật</p>
+                            <div class="social-icons" style="margin-top: 15px;">
+                                <a href="#" style="margin-right: 10px;"><i class="fab fa-facebook"></i></a>
+                                <a href="#" style="margin-right: 10px;"><i class="fab fa-youtube"></i></a>
+                                <a href="#" style="margin-right: 10px;"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-tiktok"></i></a>
+                            </div>
                         </div>
                     </div>
                     <div class="footer-bottom">
-                        <p>&copy; 2023 PC Builder. All rights reserved.</p>
+                        <p>© 2023 PC Market. Tất cả các quyền được bảo lưu.</p>
                     </div>
                 </div>
             </footer>
 
             <script>
-                // Mobile menu toggle
-                const menuToggle = document.querySelector('.menu-toggle');
-                const mobileMenu = document.querySelector('.mobile-menu');
+                // Add Font Awesome for icons
+                const fontAwesome = document.createElement('link');
+                fontAwesome.rel = 'stylesheet';
+                fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css';
+                document.head.appendChild(fontAwesome);
                 
-                menuToggle.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('active');
-                });
-                
-                // Component type selector
-                const componentTypes = document.querySelectorAll('.component-type');
-                const componentCards = document.querySelectorAll('.component-card');
-                
-                componentTypes.forEach(button => {
+                // Filter buttons
+                document.querySelectorAll('.filter-button').forEach(button => {
                     button.addEventListener('click', () => {
-                        // Remove active class from all buttons
-                        componentTypes.forEach(btn => btn.classList.remove('active'));
-                        
-                        // Add active class to clicked button
+                        document.querySelectorAll('.filter-button').forEach(btn => {
+                            btn.classList.remove('active');
+                        });
                         button.classList.add('active');
-                        
-                        // Show only cards of selected component type
-                        const selectedType = button.getAttribute('data-type');
-                        
-                        componentCards.forEach(card => {
-                            if (card.getAttribute('data-component') === selectedType) {
-                                card.style.display = 'block';
-                            } else {
-                                card.style.display = 'none';
-                            }
-                        });
                     });
                 });
                 
-                // Build management
-                const addButtons = document.querySelectorAll('.add-button');
-                const selectedComponentsContainer = document.getElementById('selected-components');
-                const emptyBuild = document.getElementById('empty-build');
-                const totalPriceElement = document.getElementById('total-price');
-                
-                let selectedComponents = {};
-                let totalPrice = 0;
-                
-                // Function to update the build summary
-                function updateBuildSummary() {
-                    // Clear the container
-                    selectedComponentsContainer.innerHTML = '';
-                    
-                    // Check if build is empty
-                    if (Object.keys(selectedComponents).length === 0) {
-                        selectedComponentsContainer.appendChild(emptyBuild);
-                        totalPriceElement.textContent = '$0.00';
-                        return;
-                    }
-                    
-                    // Add each selected component to the summary
-                    for (const type in selectedComponents) {
-                        const component = selectedComponents[type];
-                        
-                        const selectedItem = document.createElement('div');
-                        selectedItem.className = 'selected-item';
-                        selectedItem.innerHTML = \`
-                            <div class="selected-item-info">
-                                <img src="https://via.placeholder.com/50" class="selected-item-image">
-                                <div>
-                                    <div class="selected-item-name">\${component.name}</div>
-                                    <div class="selected-item-type">\${type.toUpperCase()}</div>
-                                </div>
-                            </div>
-                            <div class="selected-item-price">$\${component.price}</div>
-                            <button class="remove-button" data-component="\${type}">×</button>
-                        \`;
-                        
-                        selectedComponentsContainer.appendChild(selectedItem);
-                    }
-                    
-                    // Add event listeners to remove buttons
-                    const removeButtons = document.querySelectorAll('.remove-button');
-                    removeButtons.forEach(button => {
-                        button.addEventListener('click', () => {
-                            const componentType = button.getAttribute('data-component');
-                            
-                            // Subtract price
-                            totalPrice -= selectedComponents[componentType].price;
-                            
-                            // Remove component
-                            delete selectedComponents[componentType];
-                            
-                            // Update the summary
-                            updateBuildSummary();
-                            updateTotalPrice();
-                        });
+                // Add to cart functionality
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const productCard = button.closest('.product-card');
+                        const productName = productCard.querySelector('.product-title').textContent;
+                        alert(\`Đã thêm "\${productName}" vào giỏ hàng!\`);
                     });
-                }
+                });
                 
-                // Function to update the total price
-                function updateTotalPrice() {
-                    totalPriceElement.textContent = '$' + totalPrice.toFixed(2);
-                }
+                // Mobile menu toggle
+                const mobileMenuToggle = () => {
+                    const mainNav = document.querySelector('.main-nav');
+                    mainNav.classList.toggle('mobile-active');
+                };
                 
-                // Add event listeners to "Add" buttons
-                addButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const componentType = button.getAttribute('data-component');
-                        const componentId = button.getAttribute('data-id');
-                        const componentName = button.getAttribute('data-name');
-                        const componentPrice = parseFloat(button.getAttribute('data-price'));
+                // Initialize responsive behavior
+                const initResponsive = () => {
+                    if (window.innerWidth <= 768) {
+                        const nav = document.querySelector('nav');
+                        const menuToggle = document.createElement('button');
+                        menuToggle.className = 'mobile-menu-toggle';
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        menuToggle.addEventListener('click', mobileMenuToggle);
                         
-                        // If we already have a component of this type, subtract its price
-                        if (selectedComponents[componentType]) {
-                            totalPrice -= selectedComponents[componentType].price;
+                        if (!document.querySelector('.mobile-menu-toggle')) {
+                            nav.querySelector('.container').prepend(menuToggle);
                         }
-                        
-                        // Add the new component
-                        selectedComponents[componentType] = {
-                            id: componentId,
-                            name: componentName,
-                            price: componentPrice
-                        };
-                        
-                        // Add the price
-                        totalPrice += componentPrice;
-                        
-                        // Update the UI
-                        updateBuildSummary();
-                        updateTotalPrice();
-                    });
-                });
+                    }
+                };
+                
+                window.addEventListener('load', initResponsive);
+                window.addEventListener('resize', initResponsive);
             </script>
         </body>
         </html>
       `;
 
+      // Add FontAwesome script
+      const fontAwesomeScript = document.createElement('script');
+      fontAwesomeScript.src = 'https://kit.fontawesome.com/a076d05399.js';
+      fontAwesomeScript.crossOrigin = 'anonymous';
+      document.head.appendChild(fontAwesomeScript);
+
       // Initialize the embedded HTML/JS
       const script = document.createElement('script');
       script.textContent = `
         // This script is needed to initialize any JavaScript in the embedded HTML
-        // It can be empty since the embedded HTML already contains all the necessary JavaScript
       `;
       containerRef.current.appendChild(script);
     }
@@ -808,7 +1092,7 @@ const Index = () => {
   return (
     <div 
       ref={containerRef} 
-      className="pc-builder-container w-full min-h-screen"
+      className="w-full min-h-screen"
     />
   );
 };
