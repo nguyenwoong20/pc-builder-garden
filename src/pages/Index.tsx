@@ -210,6 +210,71 @@ const Index = () => {
                     font-weight: bold;
                 }
                 
+                /* Product Categories Dropdown */
+                .product-categories-dropdown {
+                    position: relative;
+                }
+                
+                .product-categories-dropdown > a {
+                    display: flex;
+                    align-items: center;
+                }
+                
+                .product-categories-dropdown > a i {
+                    margin-left: 5px;
+                }
+                
+                .product-categories-dropdown:hover .dropdown-content {
+                    display: flex;
+                }
+                
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background-color: #232F3E;
+                    min-width: 600px;
+                    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+                    z-index: 20;
+                    padding: 20px;
+                    flex-wrap: wrap;
+                }
+                
+                .dropdown-column {
+                    flex: 1;
+                    min-width: 180px;
+                    padding: 0 10px;
+                }
+                
+                .dropdown-column h4 {
+                    color: #FF9900;
+                    border-bottom: 1px solid rgba(255,255,255,0.1);
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+                }
+                
+                .dropdown-column ul {
+                    position: static;
+                    display: block;
+                    width: 100%;
+                    background-color: transparent;
+                    box-shadow: none;
+                }
+                
+                .dropdown-column ul li {
+                    padding: 0;
+                }
+                
+                .dropdown-column ul li a {
+                    padding: 5px 0;
+                    font-size: 14px;
+                }
+                
+                .dropdown-column ul li a:hover {
+                    color: #FF9900;
+                }
+                
                 /* Banner styles */
                 .banner {
                     margin: 20px 0;
@@ -476,6 +541,10 @@ const Index = () => {
                         max-width: 300px;
                         margin: 0 15px;
                     }
+                    
+                    .dropdown-content {
+                        min-width: 400px;
+                    }
                 }
                 
                 @media (max-width: 768px) {
@@ -509,6 +578,22 @@ const Index = () => {
                         position: static;
                         width: 100%;
                         display: none;
+                    }
+                    
+                    .product-categories-dropdown .dropdown-content {
+                        position: static;
+                        width: 100%;
+                        min-width: auto;
+                        display: none;
+                        flex-direction: column;
+                    }
+                    
+                    .product-categories-dropdown:hover .dropdown-content {
+                        display: none;
+                    }
+                    
+                    .dropdown-toggle.active + .dropdown-content {
+                        display: flex;
                     }
                     
                     .support-nav {
@@ -591,45 +676,52 @@ const Index = () => {
                     <div class="container nav-container">
                         <ul class="main-nav">
                             <li><a href="#">Trang chủ</a></li>
-                            <li>
-                                <a href="#">Máy tính chơi game</a>
-                                <ul>
-                                    <li><a href="#">PC Gaming dưới 10 triệu</a></li>
-                                    <li><a href="#">PC Gaming 10-20 triệu</a></li>
-                                    <li><a href="#">PC Gaming 20-30 triệu</a></li>
-                                    <li><a href="#">PC Gaming trên 30 triệu</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">PC Văn phòng</a>
-                                <ul>
-                                    <li><a href="#">PC Office dưới 10 triệu</a></li>
-                                    <li><a href="#">PC Office 10-15 triệu</a></li>
-                                    <li><a href="#">PC Office cao cấp</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">PC Workstation</a>
-                                <ul>
-                                    <li><a href="#">PC Đồ họa - Kỹ thuật</a></li>
-                                    <li><a href="#">PC Render & 3D</a></li>
-                                    <li><a href="#">PC Studio</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#">Linh kiện PC</a>
-                                <ul>
-                                    <li><a href="#">CPU</a></li>
-                                    <li><a href="#">Mainboard</a></li>
-                                    <li><a href="#">RAM</a></li>
-                                    <li><a href="#">VGA</a></li>
-                                    <li><a href="#">SSD/HDD</a></li>
-                                    <li><a href="#">PSU</a></li>
-                                    <li><a href="#">Case</a></li>
-                                    <li><a href="#">Tản nhiệt</a></li>
-                                </ul>
+                            <li class="product-categories-dropdown">
+                                <a href="#" class="dropdown-toggle">Danh mục sản phẩm <i class="fas fa-chevron-down"></i></a>
+                                <div class="dropdown-content">
+                                    <div class="dropdown-column">
+                                        <h4>Máy tính chơi game</h4>
+                                        <ul>
+                                            <li><a href="#">PC Gaming dưới 10 triệu</a></li>
+                                            <li><a href="#">PC Gaming 10-20 triệu</a></li>
+                                            <li><a href="#">PC Gaming 20-30 triệu</a></li>
+                                            <li><a href="#">PC Gaming trên 30 triệu</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown-column">
+                                        <h4>PC Văn phòng</h4>
+                                        <ul>
+                                            <li><a href="#">PC Office dưới 10 triệu</a></li>
+                                            <li><a href="#">PC Office 10-15 triệu</a></li>
+                                            <li><a href="#">PC Office cao cấp</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown-column">
+                                        <h4>PC Workstation</h4>
+                                        <ul>
+                                            <li><a href="#">PC Đồ họa - Kỹ thuật</a></li>
+                                            <li><a href="#">PC Render & 3D</a></li>
+                                            <li><a href="#">PC Studio</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown-column">
+                                        <h4>Linh kiện PC</h4>
+                                        <ul>
+                                            <li><a href="#">CPU</a></li>
+                                            <li><a href="#">Mainboard</a></li>
+                                            <li><a href="#">RAM</a></li>
+                                            <li><a href="#">VGA</a></li>
+                                            <li><a href="#">SSD/HDD</a></li>
+                                            <li><a href="#">PSU</a></li>
+                                            <li><a href="#">Case</a></li>
+                                            <li><a href="#">Tản nhiệt</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </li>
                             <li><a href="#">Build PC</a></li>
+                            <li><a href="#">Phụ kiện</a></li>
+                            <li><a href="#">Khuyến mãi</a></li>
                         </ul>
                         <div class="support-nav">
                             <div class="hotline">
@@ -1064,6 +1156,14 @@ const Index = () => {
                         if (!document.querySelector('.mobile-menu-toggle')) {
                             nav.querySelector('.container').prepend(menuToggle);
                         }
+                        
+                        // Make dropdown toggles work on mobile
+                        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+                            toggle.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                toggle.classList.toggle('active');
+                            });
+                        });
                     }
                 };
                 
